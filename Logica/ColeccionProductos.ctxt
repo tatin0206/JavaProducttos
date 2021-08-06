@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=ColeccionProductos
+comment1.params=p
+comment1.target=void\ addProducto(Producto)
+comment2.params=index
+comment2.target=Producto\ getProducto(int)
+comment3.params=index
+comment3.target=void\ deleteProducto(int)
+comment4.params=
+comment4.target=int\ getSize()
+comment5.params=index\ p
+comment5.target=void\ setProducto(int,\ Producto)
+comment6.params=p
+comment6.target=boolean\ guardarProducto(Producto)
+comment7.params=index\ p
+comment7.target=void\ actualizarProducto(int,\ Producto)
+comment8.params=
+comment8.target=void\ cargarProductos()
+comment9.params=index
+comment9.target=void\ borrarProducto(int)
+numComments=10

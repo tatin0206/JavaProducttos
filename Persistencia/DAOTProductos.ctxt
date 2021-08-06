@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=DAOTProductos
+comment1.params=p
+comment1.target=int\ guardarProducto(Logica.Producto)
+comment2.params=
+comment2.target=java.util.ArrayList\ obtenerProductos()
+comment3.params=p
+comment3.target=void\ modificarProducto(Logica.Producto)
+comment4.params=p
+comment4.target=void\ borrarProducto(Logica.Producto)
+numComments=5

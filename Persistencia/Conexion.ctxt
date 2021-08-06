@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Conexion
+comment1.params=
+comment1.target=void\ crearConexion()
+comment2.params=sql
+comment2.target=java.sql.ResultSet\ ejecutarQuery(java.lang.String)
+comment3.params=sql
+comment3.target=java.sql.ResultSet\ ejecutarUpdate(java.lang.String)
+comment4.params=
+comment4.target=void\ cerrarConexion()
+numComments=5
