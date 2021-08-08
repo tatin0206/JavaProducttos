@@ -67,4 +67,24 @@ public class ColeccionProductos
         dao.borrarProducto(getProducto(index));
         deleteProducto(index);
     }
+    
+    public Object[][] armarMatrizVehiculos()
+    {
+        int cantColumnas = 5;
+        int cant = getSize();
+        Object[][] datos = new Object[cant][cantColumnas];
+        
+        for (int i =0; i<cant; i++)
+        {
+            datos[i] = getProducto(i).toArray();
+        }
+        return datos;
+
+    }
+    
+    public String[] armarColumnas()
+    {
+        String [] columnas = {"Id", "Nombre", "Cantidad", "Categoria", "Precio" };
+        return columnas;
+    }
 }

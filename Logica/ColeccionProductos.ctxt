@@ -2,6 +2,10 @@
 comment0.target=ColeccionProductos
 comment1.params=p
 comment1.target=void\ addProducto(Producto)
+comment10.params=
+comment10.target=java.lang.Object[][]\ armarMatrizVehiculos()
+comment11.params=
+comment11.target=java.lang.String[]\ armarColumnas()
 comment2.params=index
 comment2.target=Producto\ getProducto(int)
 comment3.params=index
@@ -18,4 +22,4 @@ comment8.params=
 comment8.target=void\ cargarProductos()
 comment9.params=index
 comment9.target=void\ borrarProducto(int)
-numComments=10
+numComments=12

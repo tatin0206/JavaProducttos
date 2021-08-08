@@ -94,4 +94,10 @@ public class Producto
         return "Producto "+this.nombre+" Cantidad "+this.cantidad+" Categoria "+this.categoria+" Precio "+this.precio;
     }
     
+    public Object[] toArray()
+    {
+        Object [] r = {id, nombre, cantidad, categoria, precio};
+        return r; 
+    }
+    
 }
