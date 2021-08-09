@@ -3,6 +3,7 @@ import javax.swing.JOptionPane;
 import Logica.ColeccionProductos;
 import Logica.Producto;
 
+
 public class Pantalla
 {
     private ColeccionProductos col = new ColeccionProductos();
