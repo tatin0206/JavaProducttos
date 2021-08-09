@@ -16,20 +16,23 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+
 
 public class PantallaGrafica extends JFrame implements ActionListener
 {   
     JLabel lblnombre,lblcantidad,lblprecio, lblid, lblnombre2, lblcantidad2, lblcategoria, lblcategoria2;
     
-    JButton btneliminar,btnguardar,btnconsultar, btnactualizar;
+    JButton btneliminar,btnguardar,btnconsultar, btnactualizar, btnlimpiar, btnlimpiar2;
     
     JTextField txtnombre,txtcantidad,txtprecio, txtid,txtnombre2,txtcantidad2,txtprecio2;
     
     JComboBox combo,combo2;   
     
     private ColeccionProductos col =  new ColeccionProductos();
+    DefaultTableModel dtm;
+    String datos,columnas;
     
     public PantallaGrafica()
     {
@@ -39,14 +42,15 @@ public class PantallaGrafica extends JFrame implements ActionListener
     
     public void iniciarComponentes()
     {
+        //<---cambios en el JFrame--->
         setBounds(200, 100, 600, 500);
         setTitle("Bienvenidos a las interfaces gráficas Java");
-        
+                
         //recuadro para vidsualizar las pestañas
         JTabbedPane pestaña=new JTabbedPane();
         pestaña.setBounds(0, 0, 600, 700);          
-        //<----pestaña 1 ---->
         
+        //<----pestaña 1 ---->        
         //pestaña1
         JPanel p1=new JPanel();
         p1.setLayout(null);
@@ -64,7 +68,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         lblcantidad = new JLabel("cantidad");
         txtcantidad = new JTextField();
         lblcantidad.setBounds(50, 90, 200, 30);
-        txtcantidad.setBounds(120, 90, 250, 21);
+        txtcantidad.setBounds(120, 90, 150, 21);
         p1.add(lblcantidad);
         p1.add(txtcantidad);
         
@@ -72,7 +76,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         lblprecio = new JLabel("precio");
         txtprecio = new JTextField();
         lblprecio.setBounds(50, 130, 200, 30);
-        txtprecio.setBounds(120, 130, 250, 21);
+        txtprecio.setBounds(120, 130, 150, 21);
         p1.add(lblprecio);
         p1.add(txtprecio);
         
@@ -83,10 +87,16 @@ public class PantallaGrafica extends JFrame implements ActionListener
         combo.addItem("viveres");
         combo.addItem("licores");
         lblcategoria.setBounds(50, 170, 250, 21);
-        combo.setBounds(125, 170, 250, 21);
+        combo.setBounds(125, 170, 100, 21);
         combo.addActionListener(this);
         p1.add(lblcategoria);
         p1.add(combo);
+        
+        //boton limpiar
+        btnlimpiar = new JButton("Limpiar");
+        btnlimpiar.setBounds(150,210,95,20);
+        btnlimpiar.addActionListener(this);
+        p1.add(btnlimpiar);
         
         //boton guardar
         btnguardar = new JButton("Guardar");
@@ -105,7 +115,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         
         String [] columnas = col.armarColumnas();
         Object [][] datos = col.armarMatrizVehiculos();
-        DefaultTableModel dtm = new DefaultTableModel(datos, columnas);
+        dtm = new DefaultTableModel(datos, columnas);
         
         //creacion de la tabla en pestaña2
         JTable tabla = new JTable(dtm);
@@ -133,7 +143,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         lblid = new JLabel("Id");
         txtid = new JTextField(5);
         lblid.setBounds(50, 15, 200, 30);
-        txtid.setBounds(120, 15, 150, 20);
+        txtid.setBounds(120, 15, 50, 20);
         p4.add(lblid);
         p4.add(txtid);
         //nombre
@@ -148,7 +158,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         lblcantidad = new JLabel("cantidad");
         txtcantidad2 = new JTextField();
         lblcantidad.setBounds(50, 90, 200, 30);
-        txtcantidad2.setBounds(120, 90, 100, 20);
+        txtcantidad2.setBounds(120, 90, 150, 20);
         p4.add(lblcantidad);
         p4.add(txtcantidad2);
         
@@ -156,7 +166,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         lblprecio = new JLabel("precio");
         txtprecio2 = new JTextField();
         lblprecio.setBounds(50, 130, 200, 30);
-        txtprecio2.setBounds(120, 130, 100, 21);
+        txtprecio2.setBounds(120, 130, 150, 21);
         p4.add(lblprecio);
         p4.add(txtprecio2);
         
@@ -171,6 +181,12 @@ public class PantallaGrafica extends JFrame implements ActionListener
         lblcategoria2.setBounds(50, 170, 100, 21);
         combo2.setBounds(125, 170, 100, 21);
         
+        //botonlimpiar2
+        btnlimpiar2 = new JButton("Limpiar");
+        btnlimpiar2.setBounds(230, 170, 100, 21);
+        btnlimpiar2.addActionListener(this);
+        p4.add(btnlimpiar2);
+        
         //botones pestaña2
         
         btneliminar = new JButton("Eliminar");
@@ -180,13 +196,15 @@ public class PantallaGrafica extends JFrame implements ActionListener
         
         btnconsultar = new JButton("Consultar");
         btnconsultar.setBounds(145,210,110,20);
-        btneliminar.addActionListener(this);
+        btnconsultar.addActionListener(this);
         p4.add(btnconsultar);
         
         btnactualizar = new JButton("Actualizar");
         btnactualizar.setBounds(260,210,110,20);
-        btneliminar.addActionListener(this);
+        btnactualizar.addActionListener(this);
         p4.add(btnactualizar);
+        
+        
         
         //<---adicionar a el panel de la pestaña2
         p3.add(p4);
@@ -198,6 +216,20 @@ public class PantallaGrafica extends JFrame implements ActionListener
         setVisible(true);
     }
     
+    public void limpiar()
+    {
+        txtnombre.setText("");
+        txtcantidad.setText("");
+        txtprecio.setText("");
+    }
+    
+    public void limpiar2()
+    {
+        txtid.setText("");
+        txtnombre2.setText("");
+        txtcantidad2.setText("");
+        txtprecio2.setText("");
+    }
     public void ingresarProducto()
     {
         String nombre = txtnombre.getText();
@@ -251,7 +283,11 @@ public class PantallaGrafica extends JFrame implements ActionListener
         int index = Integer.parseInt(txtid.getText());
         Producto p = col.getProducto(index);
         String nombre = p.getNombre();
-        System.out.println(nombre);
+        String cantidad = Integer.toString(p.getCantidad());
+        String precio = Double.toString(p.getPrecio());
+        txtnombre2.setText(nombre);
+        txtcantidad2.setText(cantidad);
+        txtprecio2.setText(precio);
         
     }
     public void actionPerformed(ActionEvent e)
@@ -259,6 +295,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         if (e.getSource() == btnguardar)
         {
             ingresarProducto();
+            
         }
         
         else if (e.getSource() == btneliminar)
@@ -275,10 +312,16 @@ public class PantallaGrafica extends JFrame implements ActionListener
         {
             consultarProducto();
         }
+        
+        else if (e.getSource() == btnlimpiar)
+        {
+            limpiar();
+        }
+        
+        else if (e.getSource() == btnlimpiar2)
+        {
+            limpiar2();
+        }
+        
     }
-    
-    
-    
-    
-    
 }
