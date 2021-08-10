@@ -1,4 +1,5 @@
 package Presentacion;
+import Persistencia.ListaProductos;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -16,8 +17,11 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
-
+import java.util.ArrayList;
+import Persistencia.DAOTProductos;
 import java.awt.FlowLayout;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 public class PantallaGrafica extends JFrame implements ActionListener
@@ -28,7 +32,10 @@ public class PantallaGrafica extends JFrame implements ActionListener
     
     JTextField txtnombre,txtcantidad,txtprecio, txtid,txtnombre2,txtcantidad2,txtprecio2;
     
-    JComboBox combo,combo2;   
+    JComboBox combo,combo2; 
+    JTable tabla;
+    
+    ListaProductos lista;
     
     private ColeccionProductos col =  new ColeccionProductos();
     DefaultTableModel dtm;
@@ -36,9 +43,13 @@ public class PantallaGrafica extends JFrame implements ActionListener
     
     public PantallaGrafica()
     {
+        lista = new ListaProductos();
         col.cargarProductos();
         iniciarComponentes();
+        recargarDatosTabla();
+        
     }
+    
     
     public void iniciarComponentes()
     {
@@ -83,6 +94,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         //categoria
         lblcategoria = new JLabel("Categoria");
         combo = new JComboBox();
+        combo.addItem("");
         combo.addItem("granos");
         combo.addItem("viveres");
         combo.addItem("licores");
@@ -113,12 +125,15 @@ public class PantallaGrafica extends JFrame implements ActionListener
        
         //traer los campos para la tabla
         
+        
+        
         String [] columnas = col.armarColumnas();
-        Object [][] datos = col.armarMatrizVehiculos();
+        Object [][] datos = col.armarMartrizProductos();
         dtm = new DefaultTableModel(datos, columnas);
         
+        
         //creacion de la tabla en pestaña2
-        JTable tabla = new JTable(dtm);
+        tabla = new JTable();
         tabla.setPreferredScrollableViewportSize(new Dimension(300, 100));
         JScrollPane scroll = new JScrollPane(tabla);
         //p2.add(scroll);
@@ -172,6 +187,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         
         //categoria
         combo2 = new JComboBox();
+        combo2.addItem("");
         combo2.addItem("granos");
         combo2.addItem("viveres");
         combo2.addItem("licores");
@@ -214,6 +230,43 @@ public class PantallaGrafica extends JFrame implements ActionListener
         add(pestaña);
         setLayout(null);  
         setVisible(true);
+        
+        tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                int sel = tabla.getSelectedRow();
+                cargarInfoEnFormulario(sel);
+                System.out.println(sel);
+            }
+        });
+        
+        
+    }
+    
+        
+    public void cargarInfoEnFormulario(int sel)
+    {
+        Producto p = lista.getProductolista(sel);
+        String id = p.getId()+"";
+        String nombre = p.getNombre();
+        String cantidad = Integer.toString(p.getCantidad());
+        String precio = Double.toString(p.getPrecio());
+        txtid.setText(id);
+        txtnombre2.setText(nombre);
+        txtcantidad2.setText(cantidad);
+        txtprecio2.setText(precio);
+        
+        
+    }
+    
+    
+    public void recargarDatosTabla()
+    {
+        lista.cargarProductosDeBD();
+        String [] columnas = col.armarColumnas();
+        Object [][] datos = col.armarMartrizProductos();
+        
+        dtm = new DefaultTableModel(datos,columnas);
+        tabla.setModel(dtm);
     }
     
     public void limpiar()
@@ -239,10 +292,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         double precio = Double.parseDouble(txtprecio.getText());
         Producto p = new Producto(nombre, cantidad, categoria, precio);   
         boolean guardado = col.guardarProducto(p);
-        String [] columnas = col.armarColumnas();
-        Object [][] datos = col.armarMatrizVehiculos();
-        DefaultTableModel dtm = new DefaultTableModel(datos, columnas);
-        JTable tabla = new JTable(dtm);
+        
     }
     
     public void eliminarProducto()
@@ -290,22 +340,27 @@ public class PantallaGrafica extends JFrame implements ActionListener
         txtprecio2.setText(precio);
         
     }
+    
+        
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == btnguardar)
         {
             ingresarProducto();
+            recargarDatosTabla();
             
         }
         
         else if (e.getSource() == btneliminar)
         {
             eliminarProducto();
+            recargarDatosTabla();
         }
         
         else if (e.getSource() == btnactualizar)
         {
             actualizarProducto();
+            recargarDatosTabla();
         }
         
         else if (e.getSource() == btnconsultar)

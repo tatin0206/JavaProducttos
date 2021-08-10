@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=ListaProductos
+comment1.params=
+comment1.target=java.util.ArrayList\ getLista()
+comment2.params=lista
+comment2.target=void\ setLista(java.util.ArrayList)
+comment3.params=index
+comment3.target=Logica.Producto\ getProductolista(int)
+comment4.params=index
+comment4.target=java.lang.Object[]\ getProductoArray(int)
+comment5.params=index\ producto
+comment5.target=void\ setTerreno(int,\ Logica.Producto)
+comment6.params=producto
+comment6.target=void\ addProducto(Logica.Producto)
+comment7.params=
+comment7.target=void\ cargarProductosDeBD()
+numComments=8

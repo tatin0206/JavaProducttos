@@ -68,7 +68,7 @@ public class ColeccionProductos
         deleteProducto(index);
     }
     
-    public Object[][] armarMatrizVehiculos()
+    public Object[][] armarMartrizProductos()
     {
         int cantColumnas = 5;
         int cant = getSize();

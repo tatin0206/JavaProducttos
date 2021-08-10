@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class DAOTProductos
 {
+    private int idInsertado = 0;
+    private ArrayList<Producto> listaConsultada;
+    
     public int guardarProducto(Producto p)
     {
         int id = 0;
@@ -33,6 +36,50 @@ public class DAOTProductos
         //Cerrar conexion
         c.cerrarConexion();    
         return id;
+    }
+    
+    public boolean  obtenerProductos2()
+    {
+        listaConsultada = new ArrayList<Producto>();
+        
+        //Armar el sql
+        String sql = "SELECT id, nombre, cantidad, categoria, precio "+
+                    "FROM TProductos";
+        
+        //Crear la conexion
+        Conexion c = new Conexion();
+        c.crearConexion();
+        
+        try
+        {
+            //Ejecutar el SQL y recibir el ResultSet
+            ResultSet rs = c.ejecutarQuery(sql);
+            
+            //Recorrer todos los registros ResultSet
+            while(rs.next())
+            {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                int cantidad = rs.getInt("cantidad");
+                String categoria = rs.getString("categoria");
+                double precio = rs.getDouble("precio");
+                
+                //Armar el objeto Producto
+                Producto p = new Producto(id, nombre, cantidad, categoria, precio);
+                
+                //Armar el ArrayList
+                listaConsultada.add(p);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        //Cerrar conexion
+        c.cerrarConexion();
+        return true;
+        //return listaProductos;
     }
     
     public ArrayList<Producto> obtenerProductos()
@@ -100,5 +147,10 @@ public class DAOTProductos
         c.crearConexion();
         c.ejecutarUpdate(sql);
         c.cerrarConexion();
+    }
+    
+    public ArrayList<Producto> getListaConsultada()
+    {
+        return this.listaConsultada;
     }
 }
