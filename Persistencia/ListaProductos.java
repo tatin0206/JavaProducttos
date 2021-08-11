@@ -50,5 +50,12 @@ public class ListaProductos
             setLista(dao.getListaConsultada());    
         }
     }
+    
+    
+    
+    
+    
+    
+    
 }
 

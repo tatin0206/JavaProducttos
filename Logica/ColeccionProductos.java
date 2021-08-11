@@ -61,6 +61,7 @@ public class ColeccionProductos
         productos = dao.obtenerProductos();
     }
     
+      
     public void borrarProducto(int index)
     {
         DAOTProductos dao = new DAOTProductos();

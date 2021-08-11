@@ -26,7 +26,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class PantallaGrafica extends JFrame implements ActionListener
 {   
-    JLabel lblnombre,lblcantidad,lblprecio, lblid, lblnombre2, lblcantidad2, lblcategoria, lblcategoria2;
+    JLabel lblnombre,lblcantidad,lblprecio,lblconsultar, lblid, lblnombre2, lblcantidad2, lblcategoria, lblcategoria2,lblinfo;
     
     JButton btneliminar,btnguardar,btnconsultar, btnactualizar, btnlimpiar, btnlimpiar2;
     
@@ -120,16 +120,15 @@ public class PantallaGrafica extends JFrame implements ActionListener
         
         //pestaña2
         JPanel p2=new JPanel();        
-        //pestaña.addTab("Consultar", p2);
         p2.setBounds(0,0,300, 100);
        
         //traer los campos para la tabla
         
         
         
-        String [] columnas = col.armarColumnas();
-        Object [][] datos = col.armarMartrizProductos();
-        dtm = new DefaultTableModel(datos, columnas);
+        //String [] columnas = col.armarColumnas();
+        //Object [][] datos = col.armarMartrizProductos();
+        //dtm = new DefaultTableModel(datos, columnas);
         
         
         //creacion de la tabla en pestaña2
@@ -146,7 +145,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         
         JPanel p4=new JPanel();
         p4.setLayout(null);
-        p4.setBounds(0,0,500,240);
+        p4.setBounds(0,0,500,260);
         JPanel p5=new JPanel();
         p5.setLayout(null);
         p5.setBounds(50,260,500,100);
@@ -159,8 +158,11 @@ public class PantallaGrafica extends JFrame implements ActionListener
         txtid = new JTextField(5);
         lblid.setBounds(50, 15, 200, 30);
         txtid.setBounds(120, 15, 50, 20);
+        lblconsultar = new JLabel("Colocar id y boton consultar");
+        lblconsultar.setBounds(175, 15, 250, 20);
         p4.add(lblid);
         p4.add(txtid);
+        p4.add(lblconsultar);
         //nombre
         lblnombre2 = new JLabel("nombre");
         txtnombre2 = new JTextField();
@@ -220,8 +222,9 @@ public class PantallaGrafica extends JFrame implements ActionListener
         btnactualizar.addActionListener(this);
         p4.add(btnactualizar);
         
-        
-        
+        lblinfo = new JLabel("dar clic en la tabla para mostrarlo en la parte superior");
+        lblinfo.setBounds(50,232,400,20);
+        p4.add(lblinfo);
         //<---adicionar a el panel de la pestaña2
         p3.add(p4);
         p3.add(p5);
@@ -231,18 +234,22 @@ public class PantallaGrafica extends JFrame implements ActionListener
         setLayout(null);  
         setVisible(true);
         
-        tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        //seleccionar campos de las tablas        
+        tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+        {
             public void valueChanged(ListSelectionEvent e) {
                 int sel = tabla.getSelectedRow();
                 cargarInfoEnFormulario(sel);
-                System.out.println(sel);
             }
         });
         
         
     }
     
-        
+    
+    
+    
+    //mostrar la celda seleccionada en los jtextfield
     public void cargarInfoEnFormulario(int sel)
     {
         Producto p = lista.getProductolista(sel);
@@ -250,15 +257,17 @@ public class PantallaGrafica extends JFrame implements ActionListener
         String nombre = p.getNombre();
         String cantidad = Integer.toString(p.getCantidad());
         String precio = Double.toString(p.getPrecio());
+        String categoria = p.getCategoria();
         txtid.setText(id);
         txtnombre2.setText(nombre);
         txtcantidad2.setText(cantidad);
         txtprecio2.setText(precio);
-        
+        combo2.setSelectedItem(categoria);
         
     }
     
     
+    //traer los campos para la tabla despues de modificarla
     public void recargarDatosTabla()
     {
         lista.cargarProductosDeBD();
@@ -274,6 +283,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         txtnombre.setText("");
         txtcantidad.setText("");
         txtprecio.setText("");
+        combo.setSelectedItem("");
     }
     
     public void limpiar2()
@@ -282,6 +292,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         txtnombre2.setText("");
         txtcantidad2.setText("");
         txtprecio2.setText("");
+        combo2.setSelectedItem("");
     }
     public void ingresarProducto()
     {
@@ -335,9 +346,12 @@ public class PantallaGrafica extends JFrame implements ActionListener
         String nombre = p.getNombre();
         String cantidad = Integer.toString(p.getCantidad());
         String precio = Double.toString(p.getPrecio());
+        String categoria = p.getCategoria();
         txtnombre2.setText(nombre);
         txtcantidad2.setText(cantidad);
         txtprecio2.setText(precio);
+        combo2.setSelectedItem(categoria);
+
         
     }
     
@@ -366,6 +380,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         else if (e.getSource() == btnconsultar)
         {
             consultarProducto();
+            
         }
         
         else if (e.getSource() == btnlimpiar)
