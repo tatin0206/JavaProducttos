@@ -22,7 +22,7 @@ import Persistencia.DAOTProductos;
 import java.awt.FlowLayout;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
+import javax.swing.*;
 
 public class PantallaGrafica extends JFrame implements ActionListener
 {   
@@ -65,8 +65,12 @@ public class PantallaGrafica extends JFrame implements ActionListener
         //pestaña1
         JPanel p1=new JPanel();
         p1.setLayout(null);
-        pestaña.addTab("Registrar", p1);
-        
+        p1.setBounds(150,50,300,300);
+        JPanel p6=new JPanel();
+        p6.setLayout(null);
+        p1.setBorder(BorderFactory.createTitledBorder("Registrar datos"));
+        pestaña.addTab("Registrar", p6);
+        p6.add(p1);
         //nombre
         lblnombre = new JLabel("nombre");
         txtnombre = new JTextField();
@@ -79,7 +83,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         lblcantidad = new JLabel("cantidad");
         txtcantidad = new JTextField();
         lblcantidad.setBounds(50, 90, 200, 30);
-        txtcantidad.setBounds(120, 90, 150, 21);
+        txtcantidad.setBounds(120, 90, 50, 21);
         p1.add(lblcantidad);
         p1.add(txtcantidad);
         
@@ -113,6 +117,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         //boton guardar
         btnguardar = new JButton("Guardar");
         btnguardar.setBounds(50,210,95,20);
+        //btnguardar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnguardar.addActionListener(this);
         p1.add(btnguardar);
         
@@ -121,16 +126,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
         //pestaña2
         JPanel p2=new JPanel();        
         p2.setBounds(0,0,300, 100);
-       
-        //traer los campos para la tabla
-        
-        
-        
-        //String [] columnas = col.armarColumnas();
-        //Object [][] datos = col.armarMartrizProductos();
-        //dtm = new DefaultTableModel(datos, columnas);
-        
-        
+           
         //creacion de la tabla en pestaña2
         tabla = new JTable();
         tabla.setPreferredScrollableViewportSize(new Dimension(300, 100));
@@ -141,14 +137,16 @@ public class PantallaGrafica extends JFrame implements ActionListener
         JPanel p3=new JPanel();
         p3.setLayout(null);
         pestaña.addTab("Consultar", p3);
-        p3.setBounds(0,0,500,400);
+        p3.setBounds(0,0,500,500);
         
         JPanel p4=new JPanel();
         p4.setLayout(null);
-        p4.setBounds(0,0,500,260);
+        p4.setBorder(BorderFactory.createTitledBorder("Ingresar datos"));
+        p4.setBounds(50,0,500,260);
         JPanel p5=new JPanel();
+        p5.setBorder(BorderFactory.createTitledBorder("Base de datos"));
         p5.setLayout(null);
-        p5.setBounds(50,260,500,100);
+        p5.setBounds(50,280,500,100);
         p5.setLayout(new GridLayout(1, 0));
         p5.add(scroll);
         
@@ -156,8 +154,8 @@ public class PantallaGrafica extends JFrame implements ActionListener
         //label y texbox de id
         lblid = new JLabel("Id");
         txtid = new JTextField(5);
-        lblid.setBounds(50, 15, 200, 30);
-        txtid.setBounds(120, 15, 50, 20);
+        lblid.setBounds(50, 20, 50, 30);
+        txtid.setBounds(120, 20, 50, 20);
         lblconsultar = new JLabel("Colocar id y boton consultar");
         lblconsultar.setBounds(175, 15, 250, 20);
         p4.add(lblid);
@@ -166,24 +164,24 @@ public class PantallaGrafica extends JFrame implements ActionListener
         //nombre
         lblnombre2 = new JLabel("nombre");
         txtnombre2 = new JTextField();
-        lblnombre2.setBounds(50, 50, 200, 30);
-        txtnombre2.setBounds(120, 50, 150, 20);
+        lblnombre2.setBounds(50, 55, 200, 30);
+        txtnombre2.setBounds(120, 55, 150, 20);
         p4.add(lblnombre2);
         p4.add(txtnombre2);
         
         //cantidad
         lblcantidad = new JLabel("cantidad");
         txtcantidad2 = new JTextField();
-        lblcantidad.setBounds(50, 90, 200, 30);
-        txtcantidad2.setBounds(120, 90, 150, 20);
+        lblcantidad.setBounds(50, 95, 200, 30);
+        txtcantidad2.setBounds(120, 95, 50, 20);
         p4.add(lblcantidad);
         p4.add(txtcantidad2);
         
         //precio
         lblprecio = new JLabel("precio");
         txtprecio2 = new JTextField();
-        lblprecio.setBounds(50, 130, 200, 30);
-        txtprecio2.setBounds(120, 130, 150, 21);
+        lblprecio.setBounds(50, 135, 200, 30);
+        txtprecio2.setBounds(120, 135, 150, 21);
         p4.add(lblprecio);
         p4.add(txtprecio2);
         
@@ -196,34 +194,34 @@ public class PantallaGrafica extends JFrame implements ActionListener
         p4.add(combo2);
         lblcategoria2 = new JLabel("Categoria");
         p4.add(lblcategoria2);
-        lblcategoria2.setBounds(50, 170, 100, 21);
-        combo2.setBounds(125, 170, 100, 21);
+        lblcategoria2.setBounds(50, 175, 100, 21);
+        combo2.setBounds(125, 175, 100, 21);
         
         //botonlimpiar2
         btnlimpiar2 = new JButton("Limpiar");
-        btnlimpiar2.setBounds(230, 170, 100, 21);
+        btnlimpiar2.setBounds(230, 175, 100, 21);
         btnlimpiar2.addActionListener(this);
         p4.add(btnlimpiar2);
         
         //botones pestaña2
         
         btneliminar = new JButton("Eliminar");
-        btneliminar.setBounds(50,210,90,20);
+        btneliminar.setBounds(50,215,90,20);
         btneliminar.addActionListener(this);
         p4.add(btneliminar);
         
         btnconsultar = new JButton("Consultar");
-        btnconsultar.setBounds(145,210,110,20);
+        btnconsultar.setBounds(145,215,110,20);
         btnconsultar.addActionListener(this);
         p4.add(btnconsultar);
         
         btnactualizar = new JButton("Actualizar");
-        btnactualizar.setBounds(260,210,110,20);
+        btnactualizar.setBounds(260,215,110,20);
         btnactualizar.addActionListener(this);
         p4.add(btnactualizar);
         
-        lblinfo = new JLabel("dar clic en la tabla para mostrarlo en la parte superior");
-        lblinfo.setBounds(50,232,400,20);
+        lblinfo = new JLabel("dar clic en la tabla para mostrar los datos en la parte superior");
+        lblinfo.setBounds(25,240,500,20);
         p4.add(lblinfo);
         //<---adicionar a el panel de la pestaña2
         p3.add(p4);
@@ -242,12 +240,7 @@ public class PantallaGrafica extends JFrame implements ActionListener
                 cargarInfoEnFormulario(sel);
             }
         });
-        
-        
     }
-    
-    
-    
     
     //mostrar la celda seleccionada en los jtextfield
     public void cargarInfoEnFormulario(int sel)
@@ -265,7 +258,6 @@ public class PantallaGrafica extends JFrame implements ActionListener
         combo2.setSelectedItem(categoria);
         
     }
-    
     
     //traer los campos para la tabla despues de modificarla
     public void recargarDatosTabla()
@@ -297,7 +289,6 @@ public class PantallaGrafica extends JFrame implements ActionListener
     public void ingresarProducto()
     {
         String nombre = txtnombre.getText();
-        System.out.println(nombre);
         int cantidad = Integer.parseInt(txtcantidad.getText());
         String categoria = combo.getSelectedItem().toString();
         double precio = Double.parseDouble(txtprecio.getText());
@@ -355,7 +346,6 @@ public class PantallaGrafica extends JFrame implements ActionListener
         
     }
     
-        
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == btnguardar)
